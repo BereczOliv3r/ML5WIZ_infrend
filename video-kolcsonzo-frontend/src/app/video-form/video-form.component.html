@@ -1,0 +1,79 @@
+<div class="flex justify-center items-start min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 sm:p-6 lg:p-8">
+  <div class="bg-slate-800 shadow-2xl rounded-xl p-6 sm:p-8 lg:p-10 w-full max-w-lg transform transition-all hover:scale-105 duration-300">
+    <h2 class="text-3xl font-bold text-center text-sky-400 mb-8">
+      {{ isEditMode ? 'Videó Szerkesztése' : 'Új Videó Felvétele' }}
+    </h2>
+
+    <div *ngIf="successMessage" class="mb-4 p-4 bg-green-600 text-white rounded-lg shadow-md">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage && !videoForm.dirty" class="mb-4 p-4 bg-red-600 text-white rounded-lg shadow-md">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="videoForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="mb-6">
+        <label for="title" class="block text-sm font-medium text-sky-300 mb-1">Cím</label>
+        <input type="text" id="title" formControlName="title"
+               class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200"
+               placeholder="Pl. A Keresztapa">
+        <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="mt-2 text-xs text-red-400">
+          <div *ngIf="title?.errors?.['required']">A cím megadása kötelező.</div>
+          <div *ngIf="title?.errors?.['minlength']">A cím legalább 2 karakter hosszú legyen.</div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="director" class="block text-sm font-medium text-sky-300 mb-1">Rendező</label>
+        <input type="text" id="director" formControlName="director"
+               class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200"
+               placeholder="Pl. Francis Ford Coppola">
+        <div *ngIf="director?.invalid && (director?.dirty || director?.touched)" class="mt-2 text-xs text-red-400">
+          <div *ngIf="director?.errors?.['required']">A rendező megadása kötelező.</div>
+          <div *ngIf="director?.errors?.['minlength']">A rendező legalább 3 karakter hosszú legyen.</div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="status" class="block text-sm font-medium text-sky-300 mb-1">Státusz</label>
+        <select id="status" formControlName="status"
+                class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200">
+          <option value="szabad">Szabad</option>
+          <option value="kikölcsönzött">Kikölcsönzött</option>
+          <option value="selejtezett">Selejtezett</option>
+        </select>
+        <div *ngIf="status?.invalid && (status?.dirty || status?.touched)" class="mt-2 text-xs text-red-400">
+          <div *ngIf="status?.errors?.['required']">A státusz kiválasztása kötelező.</div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="acquisitionDate" class="block text-sm font-medium text-sky-300 mb-1">Beszerzés Dátuma (opcionális)</label>
+        <input type="date" id="acquisitionDate" formControlName="acquisitionDate"
+               class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200">
+      </div>
+
+      <div class="mb-6">
+        <label for="serialNumber" class="block text-sm font-medium text-sky-300 mb-1">Sorszám (opcionális)</label>
+        <input type="text" id="serialNumber" formControlName="serialNumber"
+               class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200"
+               placeholder="Pl. SN-XYZ123">
+      </div>
+
+      <div class="mt-8">
+        <button type="submit" [disabled]="videoForm.invalid || isLoading"
+                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-in-out transform hover:scale-105">
+          <span *ngIf="!isLoading">{{ isEditMode ? 'Módosítások Mentése' : 'Videó Mentése' }}</span>
+          <span *ngIf="isLoading" class="flex items-center">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Mentés...
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,44 @@
+<div class="min-h-screen flex flex-col bg-slate-900 text-slate-100 font-sans antialiased">
+  <header class="bg-slate-800/90 backdrop-blur-md shadow-lg sticky top-0 z-50">
+    <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div>
+          <a routerLink="/" class="text-2xl font-bold text-sky-400 hover:text-sky-300 transition-colors duration-300 ease-in-out">
+            🎬 VideóKölcsönző
+          </a>
+        </div>
+        <div class="flex items-center space-x-2 sm:space-x-4">
+          <a routerLink="/videos"
+             routerLinkActive="bg-sky-500 text-white"
+             [routerLinkActiveOptions]="{exact: true}"
+             class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-all duration-200 ease-in-out">
+            Videók
+          </a>
+          <a routerLink="/add-customer"
+             routerLinkActive="bg-sky-500 text-white"
+             [routerLinkActiveOptions]="{exact: true}"
+             class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-all duration-200 ease-in-out">
+            Új Ügyfél
+          </a>
+          <a routerLink="/add-video"
+             routerLinkActive="bg-sky-500 text-white"
+             [routerLinkActiveOptions]="{exact: true}"
+             class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:bg-slate-700 hover:text-white transition-all duration-200 ease-in-out">
+            Új Videó
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-grow container mx-auto w-full flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="bg-slate-800/90 shadow-inner mt-auto border-t border-slate-700/50">
+    <div class="container mx-auto px-6 py-6 text-center text-slate-500 text-xs">
+      &copy; {{ anioCorriente }} VideóKölcsönző Pro. Minden jog fenntartva.
+    </div>
+  </footer>
+</div>
+

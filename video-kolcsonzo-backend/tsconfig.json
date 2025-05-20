@@ -1,0 +1,54 @@
+{
+    "compilerOptions": {
+      /* Language and Environment */
+      "target": "es2017", // Vagy újabb, pl. "es2020", "esnext". Meghatározza a generált JavaScript verzióját.
+      "lib": ["es2017", "dom"], // A fordítás során elérhető könyvtárak (a "dom" nem feltétlenül szükséges backendhez, de néha hasznos lehet)
+      "experimentalDecorators": true, // Szükséges a TypeORM dekorátoraihoz (@Entity, @Column stb.)
+      "emitDecoratorMetadata": true,  // Szükséges a TypeORM dekorátoraihoz és a reflect-metadata csomaghoz
+  
+      /* Modules */
+      "module": "commonjs", // A Node.js által használt modulrendszer
+      "moduleResolution": "node", // Hogyan keresi a TypeScript a modulokat
+      "baseUrl": "./", // Az abszolút importok bázisútvonala (opcionális, de hasznos lehet)
+      // "paths": { // Opcionális aliasok útvonalakhoz, ha a baseUrl be van állítva
+      //   "@entity/*": ["src/entity/*"],
+      //   "@service/*": ["src/service/*"]
+      // },
+      "resolveJsonModule": true, // Lehetővé teszi JSON fájlok importálását modulként
+  
+      /* JavaScript Support */
+      // "allowJs": true, // Ha JavaScript fájlokat is szeretnél a projektben használni
+      // "checkJs": true,
+  
+      /* Emit */
+      "outDir": "./dist", // A lefordított JavaScript fájlok kimeneti mappája
+      "removeComments": true, // Eltávolítja a kommenteket a generált JS fájlokból
+      // "noEmit": true, // Ha nem akarsz JS fájlokat generálni (pl. csak típusellenőrzésre használod a tsc-t)
+  
+      /* Interop Constraints */
+      "esModuleInterop": true, // Javítja a CommonJS és ES modulok közötti kompatibilitást, erősen ajánlott
+      "forceConsistentCasingInFileNames": true, // Biztosítja, hogy a fájlnevekben a kis- és nagybetűk konzisztensek legyenek
+  
+      /* Type Checking */
+      "strict": true, // Bekapcsolja az összes szigorú típusellenőrzési opciót (ajánlott)
+      // "noImplicitAny": true, // Hiba, ha egy típus implicit 'any' lenne
+      // "strictNullChecks": true, // Szigorúbb null és undefined kezelés
+      // "strictFunctionTypes": true,
+      // "strictPropertyInitialization": true, // Osztálytulajdonságok inicializálásának ellenőrzése a konstruktorban
+      // "noImplicitThis": true,
+      // "alwaysStrict": true, // 'use strict' hozzáadása a generált fájlokhoz
+  
+      /* Completeness */
+      "skipLibCheck": true // Kihagyja a deklarációs fájlok (.d.ts) típusellenőrzését (gyorsíthatja a fordítást)
+    },
+    "include": [
+      "src/**/*.ts", // Mely fájlokat vegye figyelembe a fordításkor (az src mappában lévő összes .ts fájl)
+      "src/index.ts", // Vagy index.ts, ha az a fő fájlod neve és a gyökérben van
+      // "tests/**/*.ts" // Ha vannak tesztfájljaid
+    ],
+    "exclude": [
+      "node_modules", // Mely mappákat hagyja figyelmen kívül
+      "dist" // A kimeneti mappát is érdemes kizárni
+    ]
+  }
+  

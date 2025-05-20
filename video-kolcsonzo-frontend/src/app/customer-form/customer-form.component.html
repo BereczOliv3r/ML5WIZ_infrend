@@ -1,0 +1,92 @@
+<div class="flex justify-center items-start min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-4 sm:p-6 lg:p-8">
+  <div class="bg-slate-800 shadow-2xl rounded-xl p-6 sm:p-8 lg:p-10 w-full max-w-lg transform transition-all hover:scale-105 duration-300">
+    <h2 class="text-3xl font-bold text-center text-sky-400 mb-8">Új Ügyfél Felvétele</h2>
+
+    <div *ngIf="successMessage" class="mb-4 p-4 bg-green-600 text-white rounded-lg shadow-md">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage && !customerForm.dirty" class="mb-4 p-4 bg-red-600 text-white rounded-lg shadow-md">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="mb-6">
+        <label for="name" class="block text-sm font-medium text-sky-300 mb-1">Név</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200"
+          placeholder="Pl. Minta János"
+        />
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="mt-2 text-xs text-red-400">
+          <div *ngIf="name?.errors?.['required']">A név megadása kötelező.</div>
+          <div *ngIf="name?.errors?.['minlength']">A név legalább 3 karakter hosszú legyen.</div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="phone" class="block text-sm font-medium text-sky-300 mb-1">Telefonszám</label>
+        <input
+          type="tel"
+          id="phone"
+          formControlName="phone"
+          class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200"
+          placeholder="Pl. +36301234567"
+        />
+        <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="mt-2 text-xs text-red-400">
+          <div *ngIf="phone?.errors?.['required']">A telefonszám megadása kötelező.</div>
+          <div *ngIf="phone?.errors?.['pattern']">Érvénytelen telefonszám formátum.</div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="idCardNumber" class="block text-sm font-medium text-sky-300 mb-1">Személyigazolvány szám</label>
+        <input
+          type="text"
+          id="idCardNumber"
+          formControlName="idCardNumber"
+          class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200"
+          placeholder="Pl. 123456AB"
+        />
+        <div *ngIf="idCardNumber?.invalid && (idCardNumber?.dirty || idCardNumber?.touched)" class="mt-2 text-xs text-red-400">
+          <div *ngIf="idCardNumber?.errors?.['required']">A személyigazolvány szám megadása kötelező.</div>
+          <div *ngIf="idCardNumber?.errors?.['minlength']">Legalább 6 karakter hosszú legyen.</div>
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <label for="address" class="block text-sm font-medium text-sky-300 mb-1">Lakcím</label>
+        <input
+          type="text"
+          id="address"
+          formControlName="address"
+          class="mt-1 block w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 text-white sm:text-sm transition-colors duration-200"
+          placeholder="Pl. 1111 Budapest, Minta utca 1."
+        />
+        <div *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="mt-2 text-xs text-red-400">
+          <div *ngIf="address?.errors?.['required']">A lakcím megadása kötelező.</div>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <button
+          type="submit"
+          [disabled]="customerForm.invalid || isLoading"
+          class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-in-out transform hover:scale-105"
+        >
+          <span *ngIf="!isLoading">Ügyfél Mentése</span>
+          <span *ngIf="isLoading">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Mentés...
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
